@@ -1,0 +1,6 @@
+{
+    "vpn_path": "C:/Program Files/OpenVPN/bin/openvpn-gui.exe", // путь до EXE OV
+    "name_srt": "name_sert.ovpn",                                    // наименование сертификата OV
+    "log_path": "C:/Users/user_name/OpenVPN/log/name_sert.log",          // путь к логам OV
+    "path_RDP": "C:/Users/user_name/OneDrive/Desktop/RDP_MY.rdp"   // путь к сохраненному файлу RDP
+}
