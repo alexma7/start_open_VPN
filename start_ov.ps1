@@ -1,5 +1,5 @@
 # Получаем данные из JSON
-$json = Get-Content ( $PSScriptRoot + '\start_ov.jsonc')  
+$json = Get-Content ( $PWD.Path + '\start_ov.jsonc')  
 $json = $json -replace '(?m)(?<=^([^"]|"[^"]*")*)//.*' -replace '(?ms)/\*.*?\*/' 
 $json = $json | Out-String | ConvertFrom-Json
 
@@ -8,9 +8,16 @@ $vpn_path = $json.vpn_path
 $name_srt = $json.name_srt
 $log_path = $json.log_path
 $path_RDP = $json.path_RDP
+$auto_start = $json.auto_start
+
 
 # Снимаем процесс RDP
 Get-Process -processName  "*mstsc*" | Stop-Process
+
+# запускаем приложения из автозапуска
+$auto_start | ForEach-Object {
+	& $_
+}
 
 # Если не подключены к сети ВПН
 if (Get-NetAdapter -InterfaceDescription "*TAP-Windows*" | Where-Object {$_.Status -ne 'Up'})
